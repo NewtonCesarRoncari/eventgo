@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.newton.eventgo.view.fragment.ListEventFragment"
+        android:label="Eventos"
+        tools:layout="@layout/fragment_list_event">
+        <action
+            android:id="@+id/action_homeFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.newton.eventgo.view.fragment.EventDetailFragment"
+        android:label="EventDetailFragment"
+        tools:layout="@layout/fragment_event_detail"/>
+</navigation>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Event Go</string>
+    <string name="imagem_do_evento">Imagem do evento</string>
+    <string name="mock_description">O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!</string>
+    <string name="mock_title">Feira de adoção de animais na Redenção</string>
+    <string name="gradient">sombra</string>
+    <string name="price">R$ 14.99</string>
+</resources>
