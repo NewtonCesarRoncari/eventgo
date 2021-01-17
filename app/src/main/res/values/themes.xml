@@ -17,4 +17,8 @@
     <style name="AppTheme.Splash" parent="Theme.EventGo">
         <item name="android:windowBackground">@drawable/background_app_splash_screen</item>
     </style>
+
+    <style name="progressBarStyle" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateDrawable">@drawable/progress_drawable</item>
+    </style>
 </resources>

@@ -4,13 +4,13 @@
     <string name="mock_description">O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!</string>
     <string name="mock_title">Feira de adoção de animais na Redenção</string>
     <string name="gradient">sombra</string>
-    <string name="price">R$ 14.99</string>
+    <string name="price">R$ 00.00</string>
     <string name="calendar_icon">icone de calendário</string>
-    <string name="mock_date">15/01/2020</string>
+    <string name="mock_date">00/00/0000</string>
     <string name="description_title">Descrição do evento</string>
     <string name="check_in">check-in</string>
     <string name="mock_description_detail">O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!\n\nNa ocasião, teremos bottons, bloquinhos e camisetas!\n\nTraga seu Pet, os amigos e o chima, e venha aproveitar esse dia de sol com a gente e com alguns de nossos peludinhos - que estarão prontinhos para ganhar o ♥ de um humano bem legal pra chamar de seu. \n\nAceitaremos todos os tipos de doação:\n- guias e coleiras em bom estado\n- ração \n- roupinhas \n- cobertas \n- remédios dentro do prazo de validade</string>
-    <string name="mock_hour">14:15</string>
+    <string name="mock_hour">00:00</string>
     <string name="share">Compartilhar</string>
     <string name="hint_password">senha</string>
     <string name="hint_email">e-mail</string>

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:background="#1E7F81DD">
 
+    <ProgressBar
+        android:id="@+id/list_event_progressbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:max="100"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/event_list_rv"
         android:layout_width="0dp"
@@ -15,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_event_progressbar"
         tools:listitem="@layout/item_event">
 
     </androidx.recyclerview.widget.RecyclerView>

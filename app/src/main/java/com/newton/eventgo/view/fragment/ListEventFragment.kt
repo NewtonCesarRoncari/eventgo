@@ -2,6 +2,8 @@ package com.newton.eventgo.view.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -10,7 +12,9 @@ import com.newton.eventgo.models.Event
 import com.newton.eventgo.view.recyclerview.adapter.EventAdapter
 import com.newton.eventgo.view.viewmodel.ListEventViewModel
 import com.newton.eventgo.view.viewmodel.LoginViewModel
+import com.newton.eventgo.view.viewmodel.UserDataViewModel
 import kotlinx.android.synthetic.main.fragment_list_event.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListEventFragment : Fragment() {
@@ -18,6 +22,7 @@ class ListEventFragment : Fragment() {
     private lateinit var adapter: EventAdapter
     private val viewModel: ListEventViewModel by viewModel()
     private val loginViewModel: LoginViewModel by viewModel()
+    private val userViewModel: UserDataViewModel by sharedViewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
     override fun onCreateView(
@@ -35,6 +40,7 @@ class ListEventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.getEvents()
+        initLoading()
         initEventAdapter()
     }
 
@@ -46,16 +52,21 @@ class ListEventFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_user_logout) {
             loginViewModel.logout()
+            clearUserData()
             goToLoginFragment()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun clearUserData() {
+        userViewModel.setName(null)
+        userViewModel.setEmail(null)
     }
 
     private fun initEventAdapter() {
         viewModel.checkEventsReturned()
             .observe(viewLifecycleOwner, { eventsRequest ->
                 if (eventsRequest != null) {
-
                     val event = Event()
                     val events = event.eventsRequestToEvents(eventsRequest)
 
@@ -64,6 +75,7 @@ class ListEventFragment : Fragment() {
                     adapter.onItemClickListener = { eventId ->
                         goToEventDetailFragment(eventId)
                     }
+                    finishLoading()
                 }
             })
     }
@@ -84,6 +96,16 @@ class ListEventFragment : Fragment() {
         val direction = ListEventFragmentDirections
             .actionHomeFragmentToLoginFragment()
         navController.navigate(direction)
+    }
+
+    private fun initLoading() {
+        if (list_event_progressbar != null)
+            list_event_progressbar.visibility = VISIBLE
+    }
+
+    private fun finishLoading() {
+        if (list_event_progressbar != null)
+            list_event_progressbar.visibility = GONE
     }
 
 }

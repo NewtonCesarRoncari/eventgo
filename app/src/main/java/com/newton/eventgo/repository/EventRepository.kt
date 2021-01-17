@@ -2,6 +2,7 @@ package com.newton.eventgo.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.newton.eventgo.models.dto.CheckinRequest
 import com.newton.eventgo.models.dto.EventDetailRequest
 import com.newton.eventgo.retrofit.callback.CallbackWithReturn
 import com.newton.eventgo.retrofit.service.EventService
@@ -37,6 +38,20 @@ class EventRepository(
                     eventReturned.value = result
                 }
 
+                override fun whenFailure(error: String) {
+                    Log.e("retrofit", error)
+                }
+            }
+        ))
+    }
+
+    fun postBuyOrder(checkinRequest: CheckinRequest) {
+        val call = service.postCheckin(checkinRequest)
+        call.enqueue(CallbackWithReturn(
+            object: CallbackWithReturn.AnswerCallback<Any>{
+                override fun whenSucess(result: Any) {
+                    Log.i("retrofit", "request sucess")
+                }
                 override fun whenFailure(error: String) {
                     Log.e("retrofit", error)
                 }
