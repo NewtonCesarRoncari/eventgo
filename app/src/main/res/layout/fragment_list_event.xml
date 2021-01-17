@@ -19,4 +19,5 @@
         tools:listitem="@layout/item_event">
 
     </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

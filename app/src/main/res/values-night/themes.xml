@@ -13,4 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="AppTheme.Splash" parent="Theme.EventGo">
+        <item name="android:windowBackground">@drawable/background_app_splash_screen</item>
+    </style>
 </resources>

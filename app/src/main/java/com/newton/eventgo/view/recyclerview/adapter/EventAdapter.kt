@@ -8,13 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.newton.eventgo.R
-import com.newton.eventgo.extensions.loadImage
+import com.newton.eventgo.extensions.*
 import com.newton.eventgo.models.Event
 
 class EventAdapter(
     private val context: Context,
     private val events: MutableList<Event>,
-    val onItemClickListener: (long: Long) -> Unit = {},
+    var onItemClickListener: (long: Long) -> Unit = {},
 ) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,20 +32,28 @@ class EventAdapter(
 
         private lateinit var event: Event
         private val image: ImageView by lazy { itemView.findViewById(R.id.item_event_image) }
-        private val date: TextView by lazy { itemView.findViewById(R.id.item_event_date) }
+        private val date: TextView by lazy { itemView.findViewById(R.id.event_detail_date) }
+        private val hour: TextView by lazy { itemView.findViewById(R.id.event_detail_hour) }
         private val price: TextView by lazy { itemView.findViewById(R.id.item_event_price) }
         private val title: TextView by lazy { itemView.findViewById(R.id.item_event_title) }
 
         fun bind(event: Event) {
             this.event = event
-            event.image.let { imageAddress -> image.loadImage(imageAddress) }
+            event.image.let { imageAddress ->
+                if (imageAddress != null) {
+                    image.loadImage(imageAddress)
+                }
+            }
+            date.text = event.date?.fromTimesTamp()?.formatForBrazilianDate() ?: "sem data informada"
+            hour.text = event.date?.fromTimesTamp()?.formatForBrazilianHour() ?: "sem hora informada"
+            price.text = event.price?.formatForBrazilianCoin()
             title.text = event.title
         }
 
         init {
             itemView.setOnClickListener {
                 if (::event.isInitialized) {
-                    onItemClickListener(event.id)
+                    event.id?.let { it1 -> onItemClickListener(it1) }
                 }
             }
         }

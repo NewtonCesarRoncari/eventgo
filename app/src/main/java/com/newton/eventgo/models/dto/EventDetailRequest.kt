@@ -1,6 +1,7 @@
 package com.newton.eventgo.models.dto
 
 import com.fasterxml.jackson.annotation.*
+import com.newton.eventgo.models.Event
 import java.math.BigDecimal
 import java.util.*
 
@@ -18,9 +19,9 @@ import java.util.*
 )
 class EventDetailRequest {
 
-    var id: String? = null
+    var id: String? = ""
     var people: List<Any>? = null
-    var date: Int? = null
+    var date: Long? = null
     var description: String? = null
     var image: String? = null
     var longitude: Double? = null
