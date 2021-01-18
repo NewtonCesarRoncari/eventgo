@@ -79,8 +79,6 @@ U
 %app/src/main/res/drawable/ic_logo.xml,f\0\f0218a0319818df4395bd622dd91a7c4d24a3a97
 Y
 )app/src/main/res/menu/list_event_menu.xml,0\9\09780925e1624b88e00d4d9eef2254ab8a87bbb5
-Y
-)app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
 L
 .idea/dictionaries/new12.xml,d\4\d49c1341e79f4114080ddab0cf55b20ceb6a846e
 c
