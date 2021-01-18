@@ -17,13 +17,15 @@ Login             |  Eventos    | Detalhes do Evento
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="https://github.com/NewtonCesarRoncari/eventgo/blob/main/images/screen_logo.jpg" width="250" height="420" title="Tela de Login"/> | <img src="https://github.com/NewtonCesarRoncari/eventgo/blob/main/images/screen_events.jpg" width="250" height="420" title="Tela Eventos"/> | <img src="https://github.com/NewtonCesarRoncari/eventgo/blob/main/images/screen_event_detail.jpg" width="250" height="420" title="Tela de Detalhe do Evento"/>
 
+- Caso queira, é possível realizar o <a href="https://github.com/NewtonCesarRoncari/eventgo/blob/main/apk/eventgo.apk">download da apk<a/> 
+
 ### Bibliotecas
 
 - Material Design
 Inicialmente para fins de design foram utilizados as métricas e indicações do Material Design Component para uma melhor visualização e disposição dos componentes utilizados
 - Navigation
 Como a arquitetura do App foi desenvolvida em cima do MVVM (Model, View, View-Model) e em conjunto com o desenvolvimento single-activity foi escolhido a biblioteca Navigation
-do Android Jetpack para flexibilizar a coificação da navegação do aplicativo
+do Android Jetpack para flexibilizar a codificação da navegação do aplicativo
 - LiveData
 Como já explicado em relação a arquitetura MVVM, uma das soluções abordadas foram as LiveDatas, assim otimizando as respostas e o tráfego de informação no aplicativo desenvolvido
 - Koin
@@ -37,8 +39,7 @@ conjunto com Jackson para a manipulação dos objetos em objetos Json
 
 ## Rodando a aplicação
 
-Clone ou realize o download do projeto em formato Zip, más antes certifique se que contem os pré requisitos para as comunicações com o
-banco de dados
+Clone ou realize o download do projeto em formato Zip
 
 ### Pré requisitos
 
