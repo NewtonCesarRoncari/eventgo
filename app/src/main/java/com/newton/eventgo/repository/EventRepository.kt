@@ -1,6 +1,10 @@
 package com.newton.eventgo.repository
 
 import androidx.lifecycle.MutableLiveData
+import com.newton.eventgo.extensions.formatForBrazilianDate
+import com.newton.eventgo.extensions.formatForBrazilianHour
+import com.newton.eventgo.extensions.fromTimesTamp
+import com.newton.eventgo.models.EventDetail
 import com.newton.eventgo.models.dto.CheckinRequest
 import com.newton.eventgo.models.dto.EventDetailRequest
 import com.newton.eventgo.retrofit.callback.CallbackWithReturn
@@ -67,4 +71,10 @@ class EventRepository(
             }
         ))
     }
+
+    fun shareText(event: EventDetail) =
+        "${event.title}\n\n" +
+                "${event.description}\n" +
+                "${event.date?.fromTimesTamp()?.formatForBrazilianDate() ?: "-"}\n" +
+                (event.date?.fromTimesTamp()?.formatForBrazilianHour() ?: "-")
 }

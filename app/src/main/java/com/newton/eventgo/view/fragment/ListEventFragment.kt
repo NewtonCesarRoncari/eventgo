@@ -7,7 +7,6 @@ import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.afollestad.materialdialogs.MaterialDialog
 import com.newton.eventgo.R
 import com.newton.eventgo.extensions.showMessageErrorConnection
 import com.newton.eventgo.models.Event

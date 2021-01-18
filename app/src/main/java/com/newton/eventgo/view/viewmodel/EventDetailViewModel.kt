@@ -2,9 +2,6 @@ package com.newton.eventgo.view.viewmodel
 
 import android.widget.Button
 import androidx.lifecycle.ViewModel
-import com.newton.eventgo.extensions.formatForBrazilianDate
-import com.newton.eventgo.extensions.formatForBrazilianHour
-import com.newton.eventgo.extensions.fromTimesTamp
 import com.newton.eventgo.models.EventDetail
 import com.newton.eventgo.models.dto.CheckinRequest
 import com.newton.eventgo.repository.EventRepository
@@ -33,9 +30,5 @@ class EventDetailViewModel(
         button.isEnabled = false
     }
 
-    fun shareText(event: EventDetail) =
-        "${event.title}\n\n" +
-                "${event.description}\n" +
-                "${event.date?.fromTimesTamp()?.formatForBrazilianDate() ?: "-"}\n" +
-                (event.date?.fromTimesTamp()?.formatForBrazilianHour() ?: "-")
+    fun shareText(event: EventDetail) = repository.shareText(event)
 }
