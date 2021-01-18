@@ -18,7 +18,6 @@ import com.newton.eventgo.models.dto.CheckinRequest
 import com.newton.eventgo.view.viewmodel.EventDetailViewModel
 import com.newton.eventgo.view.viewmodel.UserDataViewModel
 import kotlinx.android.synthetic.main.fragment_event_detail.*
-import kotlinx.android.synthetic.main.fragment_list_event.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -46,18 +45,9 @@ class EventDetailFragment : Fragment() {
         initLoading()
 
         loadEventId()
-        event_detail_btn_checkin.setOnClickListener {
-            disableButtonCheckin()
-            sendCheckin()
-        }
+        event_detail_btn_checkin.setOnClickListener { sendCheckin() }
         event_detail_button_map.setOnClickListener { initGoogleMaps(event.lat, event.long) }
         setHasOptionsMenu(true)
-    }
-
-    private fun disableButtonCheckin() {
-        event_detail_btn_checkin.isClickable = false
-        event_detail_btn_checkin.isFocusable = false
-        event_detail_btn_checkin.isEnabled = false
     }
 
     private fun sendCheckin() {
@@ -66,15 +56,13 @@ class EventDetailFragment : Fragment() {
                 eventId,
                 userDataViewModel.getName,
                 userDataViewModel.getEmail
-            ))
+            ), whenSuccess = {
+                viewModel.disableButtonCheckin(event_detail_btn_checkin)
+                initAnimation()
+            }, whenFailure = {
+                this.showMessageErrorConnection()
+            })
         }
-        initAnimation()
-    }
-
-    private fun initGoogleMaps(lat: Double?, long: Double?) {
-        val intentLocal = Intent(Intent.ACTION_VIEW)
-        intentLocal.data = Uri.parse("geo:$lat,$long")
-        startActivity(intentLocal)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -99,23 +87,20 @@ class EventDetailFragment : Fragment() {
         val descriptionWithSpaces = "${event.description}\n\n\n\n"
         event_detail_date.text = event.date?.fromTimesTamp()?.formatForBrazilianDate() ?: "-"
         event_detail_hour.text = event.date?.fromTimesTamp()?.formatForBrazilianHour() ?: "-"
-        event_detail_title.text = event.title?.limit(36) ?: "-"
+        event_detail_title.text = event.title
         event_detail_description.text = descriptionWithSpaces
         event_detail_price.text = event.price?.formatForBrazilianCoin() ?: "-"
     }
 
-    private fun findEventId(id: Long) = viewModel.findEventById(id)
+    private fun findEventId(id: Long) =
+        viewModel.findEventById(id, whenFailure = { this.showMessageErrorConnection() })
 
     private fun loadEventId() {
         viewModel.checkEventReturned().observe(viewLifecycleOwner, { eventDetailRequest ->
             if (eventDetailRequest != null) {
                 val event = EventDetail()
 
-                initFields(
-                    event.eventDetailRequestToEventDetail(
-                        eventDetailRequest
-                    )
-                )
+                initFields(event.eventDetailRequestToEventDetail(eventDetailRequest))
                 finishLoading()
             }
         })
@@ -129,6 +114,16 @@ class EventDetailFragment : Fragment() {
         confirmed_animation.setAnimation("anim/confirmed.json")
         confirmed_animation.playAnimation()
         confirmed_animation.addAnimatorListener(animatorListener())
+    }
+
+    private fun initLoading() {
+        if (event_detail_progressbar != null)
+            event_detail_progressbar.visibility = VISIBLE
+    }
+
+    private fun finishLoading() {
+        if (event_detail_progressbar != null)
+            event_detail_progressbar.visibility = GONE
     }
 
     private fun animatorListener(): Animator.AnimatorListener {
@@ -160,30 +155,20 @@ class EventDetailFragment : Fragment() {
         }
     }
 
-    private fun initLoading() {
-        if (event_detail_progressbar != null)
-            event_detail_progressbar.visibility = VISIBLE
-    }
-
-    private fun finishLoading() {
-        if (event_detail_progressbar != null)
-            event_detail_progressbar.visibility = GONE
+    private fun initGoogleMaps(lat: Double?, long: Double?) {
+        val intentLocal = Intent(Intent.ACTION_VIEW)
+        intentLocal.data = Uri.parse("geo:$lat,$long")
+        startActivity(intentLocal)
     }
 
     private fun share() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, shareText())
+            putExtra(Intent.EXTRA_TEXT, viewModel.shareText(event))
             type = "text/plain"
         }
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
     }
-
-    private fun shareText() =
-        "${event.title}\n\n" +
-                "${event.description}\n" +
-                "${event.date?.fromTimesTamp()?.formatForBrazilianDate() ?: "-"}\n" +
-                (event.date?.fromTimesTamp()?.formatForBrazilianHour() ?: "-")
 }

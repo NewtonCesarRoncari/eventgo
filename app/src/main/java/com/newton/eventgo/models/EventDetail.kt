@@ -2,7 +2,6 @@ package com.newton.eventgo.models
 
 import com.newton.eventgo.models.dto.EventDetailRequest
 import java.math.BigDecimal
-import java.util.*
 
 class EventDetail(
     val id: Long? = 0,
@@ -14,8 +13,7 @@ class EventDetail(
     val description: String? = "",
     val price: BigDecimal? = BigDecimal.ZERO
 ) {
-    fun eventDetailRequestToEventDetail(eventDetailRequest: EventDetailRequest)
-    = EventDetail(
+    fun eventDetailRequestToEventDetail(eventDetailRequest: EventDetailRequest) = EventDetail(
         eventDetailRequest.id?.toLong(),
         eventDetailRequest.image,
         eventDetailRequest.title,

@@ -1,9 +1,8 @@
 package com.newton.eventgo.models.dto
 
-import com.fasterxml.jackson.annotation.*
-import com.newton.eventgo.models.Event
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import java.math.BigDecimal
-import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(
@@ -28,17 +27,4 @@ class EventDetailRequest {
     var latitude: Double? = null
     var price: BigDecimal? = null
     var title: String? = null
-
-    @JsonIgnore
-    private val additionalProperties: MutableMap<String, Any> = HashMap()
-
-    @JsonAnyGetter
-    fun getAdditionalProperties(): Map<String, Any> {
-        return additionalProperties
-    }
-
-    @JsonAnySetter
-    fun setAdditionalProperty(name: String, value: Any) {
-        additionalProperties[name] = value
-    }
 }

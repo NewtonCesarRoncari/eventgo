@@ -28,7 +28,7 @@ val repositoryModule = module {
 val viewModelModule = module {
     viewModel<ListEventViewModel> { ListEventViewModel(repository = get()) }
     viewModel<UserDataViewModel> { UserDataViewModel(repository = get()) }
-    viewModel<LoginViewModel> { LoginViewModel( repository = get()) }
+    viewModel<LoginViewModel> { LoginViewModel(repository = get()) }
     viewModel<EventDetailViewModel> { (eventId: Long) ->
         EventDetailViewModel(
             eventId,

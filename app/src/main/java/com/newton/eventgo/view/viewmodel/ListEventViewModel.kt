@@ -9,7 +9,7 @@ class ListEventViewModel(
     private val repository: EventRepository
 ) : ViewModel() {
 
-    fun getEvents() = repository.getEvents()
+    fun getEvents(whenFailure: () -> Unit) = repository.getEvents(whenFailure)
 
     fun checkEventsReturned(): LiveData<List<EventDetailRequest>> = repository.eventsReturned
 }

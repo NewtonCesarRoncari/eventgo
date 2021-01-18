@@ -47,16 +47,14 @@ class LoginFragment : Fragment() {
         login_btn.setOnClickListener {
             val formIsValid: Boolean = validAllFields()
             if (formIsValid) {
-                getUserData()
+                userViewModel.setUserData(
+                    login_name.text.toString().trim(),
+                    login_email.text.toString().trim()
+                )
                 viewModel.login()
                 goToListEventFragment()
             }
         }
-    }
-
-    private fun getUserData() {
-        userViewModel.setName(login_name.text.toString())
-        userViewModel.setEmail(login_email.text.toString())
     }
 
     private fun goToListEventFragment() {

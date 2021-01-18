@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_event_progressbar"
         app:srcCompat="@drawable/pre_image"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="UnknownIdInLayout,VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/gradient"
@@ -41,15 +41,17 @@
 
     <TextView
         android:id="@+id/event_detail_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:text="@string/mock_title"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -93,20 +95,18 @@
         android:id="@+id/event_detail_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:text="@string/price"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/event_detail_hour" />
 
     <Button
         android:id="@+id/event_detail_button_map"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/shape_round_button_map"
         android:drawableBottom="@drawable/ic_place"
@@ -114,7 +114,7 @@
         android:gravity="center_vertical|center_horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/event_detail_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_detail_title"
+        app:layout_constraintTop_toBottomOf="@+id/event_detail_image"
         tools:ignore="UnusedAttribute" />
 
 
@@ -159,9 +159,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/shape_button_check_in"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/shape_button_check_in"
         android:text="@string/check_in"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/scrollView2"

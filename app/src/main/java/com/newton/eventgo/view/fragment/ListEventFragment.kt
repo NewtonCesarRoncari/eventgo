@@ -7,7 +7,9 @@ import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.afollestad.materialdialogs.MaterialDialog
 import com.newton.eventgo.R
+import com.newton.eventgo.extensions.showMessageErrorConnection
 import com.newton.eventgo.models.Event
 import com.newton.eventgo.view.recyclerview.adapter.EventAdapter
 import com.newton.eventgo.view.viewmodel.ListEventViewModel
@@ -39,7 +41,7 @@ class ListEventFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.getEvents()
+        viewModel.getEvents(whenFailure = { this.showMessageErrorConnection() })
         initLoading()
         initEventAdapter()
     }
@@ -52,15 +54,10 @@ class ListEventFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_user_logout) {
             loginViewModel.logout()
-            clearUserData()
+            userViewModel.clearUserData()
             goToLoginFragment()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun clearUserData() {
-        userViewModel.setName(null)
-        userViewModel.setEmail(null)
     }
 
     private fun initEventAdapter() {

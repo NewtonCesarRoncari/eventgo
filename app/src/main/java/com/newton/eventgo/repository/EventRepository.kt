@@ -1,6 +1,5 @@
 package com.newton.eventgo.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.newton.eventgo.models.dto.CheckinRequest
 import com.newton.eventgo.models.dto.EventDetailRequest
@@ -15,45 +14,55 @@ class EventRepository(
     var eventReturned =
         MutableLiveData<EventDetailRequest>().apply { postValue(null) }
 
-    fun getEvents() {
+    fun getEvents(whenFailure: () -> Unit = {}) {
         val call = service.getEvents()
         call.enqueue(CallbackWithReturn(
             object : CallbackWithReturn.AnswerCallback<List<EventDetailRequest>> {
-                override fun whenSucess(result: List<EventDetailRequest>) {
-                    eventsReturned.value = result
+                override fun whenSuccess(result: List<EventDetailRequest>, requestCode: Int) {
+
+                    if (requestCode == 200) eventsReturned.value = result else whenFailure()
                 }
 
                 override fun whenFailure(error: String) {
-                    Log.e("retrofit", error)
+                    whenFailure()
                 }
             }
         ))
     }
 
-    fun findEventById(id: Long) {
+    fun findEventById(
+        id: Long,
+        whenFailure: () -> Unit = {}
+    ) {
         val call = service.findEventById(id)
         call.enqueue(CallbackWithReturn(
             object : CallbackWithReturn.AnswerCallback<EventDetailRequest> {
-                override fun whenSucess(result: EventDetailRequest) {
-                    eventReturned.value = result
+                override fun whenSuccess(result: EventDetailRequest, requestCode: Int) {
+
+                    if (requestCode == 200) eventReturned.value = result else whenFailure()
                 }
 
                 override fun whenFailure(error: String) {
-                    Log.e("retrofit", error)
+                    whenFailure()
                 }
             }
         ))
     }
 
-    fun postBuyOrder(checkinRequest: CheckinRequest) {
+    fun postBuyOrder(
+        checkinRequest: CheckinRequest,
+        whenSuccess: () -> Unit = {},
+        whenFailure: () -> Unit = {}
+    ) {
         val call = service.postCheckin(checkinRequest)
         call.enqueue(CallbackWithReturn(
-            object: CallbackWithReturn.AnswerCallback<Any>{
-                override fun whenSucess(result: Any) {
-                    Log.i("retrofit", "request sucess")
+            object : CallbackWithReturn.AnswerCallback<Any> {
+                override fun whenSuccess(result: Any, requestCode: Int) {
+                    if (requestCode == 201) whenSuccess() else whenFailure()
                 }
+
                 override fun whenFailure(error: String) {
-                    Log.e("retrofit", error)
+                    whenFailure()
                 }
             }
         ))

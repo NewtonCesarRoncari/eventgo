@@ -15,7 +15,7 @@ class CallbackWithReturn<T>(private val callback: AnswerCallback<T>) : Callback<
         if (response.isSuccessful) {
             val result = response.body()
             if (result != null) {
-                callback.whenSucess(result)
+                callback.whenSuccess(result, response.code())
             }
         } else {
             callback.whenFailure(MENSAGEM_ERRO_RESPOSTA_NAO_SUCEDIDA)
@@ -28,7 +28,7 @@ class CallbackWithReturn<T>(private val callback: AnswerCallback<T>) : Callback<
     }
 
     interface AnswerCallback<T> {
-        fun whenSucess(result: T)
+        fun whenSuccess(result: T, requestCode: Int)
         fun whenFailure(error: String)
     }
 

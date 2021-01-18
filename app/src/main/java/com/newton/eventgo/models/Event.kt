@@ -1,6 +1,5 @@
 package com.newton.eventgo.models
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.newton.eventgo.models.dto.EventDetailRequest
 import java.math.BigDecimal
 
@@ -12,7 +11,6 @@ class Event(
     val price: BigDecimal? = BigDecimal.ZERO
 ) {
     fun eventsRequestToEvents(eventsRequest: List<EventDetailRequest>): MutableList<Event> {
-
         val events = mutableListOf<Event>()
 
         eventsRequest.forEach { eventRequest ->

@@ -57,8 +57,6 @@ s
 Capp/src/main/java/com/newton/eventgo/view/fragment/LoginFragment.kt,e\c\eca673d50c240b29465d72c52a2fd6d303b9cf97
 N
 images/animate_atomo_muni.json,4\7\477a2864f529dc3a5d486612af7d52a926909ccb
-[
-+app/src/main/assets/anim/animate_login.json,3\a\3a0ec9987879a8af12094b0253bca07ff9f2de86
 I
 images/animate_login.json,7\c\7c4ed48f6d28ce8ada2c24dd16399ec20c701eef
 C
@@ -79,8 +77,6 @@ h
 8app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml,6\e\6ec7d34b130497a10dc92abcde9b313d370a89df
 U
 %app/src/main/res/drawable/ic_logo.xml,f\0\f0218a0319818df4395bd622dd91a7c4d24a3a97
-V
-&app/src/main/res/layout/item_event.xml,d\8\d8b4ce6aad6eff1568c61a9a9841c91145838df8
 Y
 )app/src/main/res/menu/list_event_menu.xml,0\9\09780925e1624b88e00d4d9eef2254ab8a87bbb5
 Y
@@ -105,3 +101,7 @@ t
 Dapp/src/main/java/com/newton/eventgo/validation/PatternValidation.kt,2\f\2f2200bd17c2f54ead5c04a9f11c0df8ccf27211
 n
 >app/src/main/java/com/newton/eventgo/validation/ValidaEmail.kt,1\8\184d15c06c47154e85d8df50d7698544aff2e844
+E
+images/confirmed.json,b\b\bbf694819097d798222e1cadb6421fe6d8ae0012
+C
+images/name_app.svg,8\d\8d3537fb60862e35d7a9f7cc50dbb4eae2bfc8d8
